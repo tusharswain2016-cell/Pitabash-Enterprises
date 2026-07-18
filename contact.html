@@ -111,16 +111,22 @@
   }
   .form-success.show{display:block;}
 
-  .whatsapp-card{
-    background:linear-gradient(135deg,#1ea952,#128c42); border-radius:16px; padding:32px;
-    color:#fff; margin-bottom:26px;
+  .social-row{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:26px;}
+  .whatsapp-card, .instagram-card{
+    border-radius:16px; padding:28px 24px; color:#fff; display:flex; flex-direction:column;
   }
-  .whatsapp-card h3{color:#fff; font-size:19px; margin-bottom:10px;}
-  .whatsapp-card p{font-size:14px; opacity:.92; line-height:1.7; margin-bottom:20px;}
-  .whatsapp-btns{display:flex; flex-wrap:wrap; gap:12px;}
+  .whatsapp-card{background:linear-gradient(135deg,#1ea952,#128c42);}
+  .instagram-card{background:linear-gradient(135deg,#feda75,#d62976 45%,#4f5bd5);}
+  .whatsapp-card h3, .instagram-card h3{color:#fff; font-size:18px; margin-bottom:10px;}
+  .whatsapp-card p, .instagram-card p{font-size:13.5px; opacity:.92; line-height:1.65; margin-bottom:20px; flex:1;}
+  .whatsapp-btns{display:flex; flex-wrap:wrap; gap:10px;}
   .whatsapp-btn{
-    display:inline-flex; align-items:center; gap:10px; background:#fff; color:#128c42;
-    padding:12px 22px; border-radius:8px; font-weight:700; font-size:14.5px;
+    display:inline-flex; align-items:center; gap:8px; background:#fff; color:#128c42;
+    padding:11px 18px; border-radius:8px; font-weight:700; font-size:14px;
+  }
+  .instagram-btn{
+    display:inline-flex; align-items:center; gap:8px; background:#fff; color:#c1266b;
+    padding:11px 18px; border-radius:8px; font-weight:700; font-size:14px; align-self:flex-start;
   }
   .info-card{
     background:#fff; border:1px solid var(--line); border-radius:16px; padding:30px;
@@ -193,7 +199,7 @@
     header{position:relative;}
     .foot-grid{grid-template-columns:1fr 1fr;}
     .banner-inner h1{font-size:30px;}
-    .quick-grid, .contact-grid, .store-grid{grid-template-columns:1fr;}
+    .quick-grid, .contact-grid, .store-grid, .social-row{grid-template-columns:1fr;}
     .form-row{grid-template-columns:1fr;}
   }
 </style>
@@ -232,14 +238,14 @@
       <div>
         <h3>Email Us</h3>
         <p>We usually reply within a business day.</p>
-        <a href="mailto:info@pitabash.com" class="link">info@pitabash.com</a>
+        <a href="mailto:support@pitbashenterprises.in" class="link">support@pitbashenterprises.in</a>
       </div>
     </div>
     <div class="quick-card">
       <div class="quick-ic">☎</div>
       <div>
         <h3>Call Us</h3>
-        <p>Mon–Sat, 10:00 AM – 7:00 PM</p>
+        <p>Everyday, 10:00 AM – 9:00 PM</p>
         <a href="tel:+919938166411" class="link">+91 99381 66411</a><br>
         <a href="tel:+919827711991" class="link">+91 98277 11991</a>
       </div>
@@ -303,12 +309,19 @@
     </div>
 
     <div>
-      <div class="whatsapp-card">
-        <h3>💬 Chat With Us on WhatsApp</h3>
-        <p>Prefer a quick chat? Message us directly for the fastest response on pricing and availability.</p>
-        <div class="whatsapp-btns">
-          <a href="https://wa.me/919938166411" target="_blank" class="whatsapp-btn">+91 99381 66411 →</a>
-          <a href="https://wa.me/919827711991" target="_blank" class="whatsapp-btn">+91 98277 11991 →</a>
+      <div class="social-row">
+        <div class="whatsapp-card">
+          <h3>💬 Chat On WhatsApp</h3>
+          <p>Prefer a quick chat? Message us directly for the fastest response on pricing and availability.</p>
+          <div class="whatsapp-btns">
+            <a href="https://wa.me/919938166411" target="_blank" class="whatsapp-btn">+91 99381 66411 →</a>
+            <a href="https://wa.me/919827711991" target="_blank" class="whatsapp-btn">+91 98277 11991 →</a>
+          </div>
+        </div>
+        <div class="instagram-card">
+          <h3>📷 Follow On Instagram</h3>
+          <p>See our latest play space setups, store updates, and behind-the-scenes moments.</p>
+          <a href="https://www.instagram.com/ohhbabybbsr?utm_source=qr" target="_blank" class="instagram-btn">@ohhbabybbsr →</a>
         </div>
       </div>
       <div class="info-card">
@@ -323,14 +336,14 @@
           <span class="info-ic">🕐</span>
           <div>
             <h4>Working Hours</h4>
-            <p>Monday – Saturday, 10:00 AM – 7:00 PM<br>Sunday: Closed</p>
+            <p>Everyday Open<br>10:00 AM – 9:00 PM</p>
           </div>
         </div>
         <div class="info-row">
           <span class="info-ic">✉</span>
           <div>
             <h4>Email</h4>
-            <p><a href="mailto:info@pitabash.com">info@pitabash.com</a></p>
+            <p><a href="mailto:support@pitbashenterprises.in">support@pitbashenterprises.in</a></p>
           </div>
         </div>
         <div class="info-row">
@@ -390,7 +403,7 @@
           <img src="https://orchid-hippopotamus-237502.hostingersite.com/wp-content/uploads/2026/07/6f3552e7-ed33-4e20-9df2-e459625993d7-e1784097760874.png" alt="PEPL logo">
         </div>
         <p>Pitabash Enterprises Private Limited is dedicated to creating safe, engaging, and development-oriented spaces for children through innovative products, playgrounds, crèches, and educational infrastructure solutions.</p>
-        <div class="foot-contact"><span>✉</span> info@pitabash.com</div>
+        <div class="foot-contact"><span>✉</span> support@pitbashenterprises.in</div>
         <div class="foot-contact"><span>☎</span> +91 99381 66411</div>
         <div class="foot-contact"><span>☎</span> +91 98277 11991</div>
         <div class="foot-contact"><span>📍</span> Bhubaneswar, Odisha, India</div>

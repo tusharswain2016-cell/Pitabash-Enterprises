@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us | Pitabash Enterprises</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#152a4a;
+    --navy-soft:#2c4468;
+    --teal:#1c5d78;
+    --teal-dark:#134759;
+    --orange:#f2801f;
+    --cream:#fbf9f5;
+    --grey:#6c7688;
+    --line:#e8e6df;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Jost','Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;
+    color:var(--navy);
+    background:var(--cream);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Jost',sans-serif; font-weight:700; color:var(--navy); line-height:1.15;}
+  a{text-decoration:none; color:inherit;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+
+  /* HEADER */
+  header{padding:14px 0;}
+  .header-inner{display:flex; align-items:center; justify-content:space-between;}
+  .logo img{height:88px; width:auto;}
+  nav{display:flex; gap:38px; font-size:15px; font-weight:500; color:var(--navy-soft);}
+  nav a{position:relative; padding-bottom:4px;}
+  nav a.active{color:var(--navy); font-weight:700;}
+  nav a.active::after{content:""; position:absolute; left:0; bottom:0; width:100%; height:2px; background:var(--orange);}
+  .msg-link{display:flex; align-items:center; gap:8px; font-size:15px; color:var(--navy-soft);}
+  .hamburger{
+    display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px; z-index:50;
+  }
+  .hamburger span{width:26px; height:2.5px; background:var(--navy); border-radius:2px; transition:transform .25s ease, opacity .25s ease;}
+  .hamburger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg);}
+
+  /* PAGE BANNER */
+  .page-banner{
+    position:relative; height:280px; overflow:hidden;
+    display:flex; align-items:center; justify-content:center; text-align:center;
+  }
+  .page-banner img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+  .page-banner::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(0deg, rgba(21,42,74,.82), rgba(21,42,74,.6));
+  }
+  .banner-inner{position:relative; z-index:2; color:#fff;}
+  .banner-inner h1{color:#fff; font-size:42px; margin-bottom:10px;}
+  .breadcrumb{font-size:14px; color:#dbe3ee;}
+  .breadcrumb a{color:#fff; font-weight:600;}
+  .breadcrumb span{margin:0 8px; opacity:.6;}
+
+  /* STORY SECTION */
+  .story{padding:90px 0 70px;}
+  .story-grid{display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center;}
+  .eyebrow{font-size:13px; letter-spacing:2px; color:var(--orange); font-weight:700; text-transform:uppercase; margin-bottom:10px;}
+  .story h2{font-size:34px; margin-bottom:20px;}
+  .story p{color:var(--grey); font-size:15.5px; line-height:1.85; margin-bottom:16px;}
+  .story-photo{border-radius:14px; overflow:hidden; height:420px;}
+  .story-photo img{width:100%; height:100%; object-fit:cover;}
+  .stat-row{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:34px;}
+  .stat-box{text-align:left;}
+  .stat-box .num{font-size:32px; font-weight:800; color:var(--teal-dark);}
+  .stat-box .label{font-size:13.5px; color:var(--grey); margin-top:4px;}
+
+  /* MISSION / VISION */
+  .mv{padding:30px 0 70px;}
+  .mv-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
+  .mv-card{
+    background:#fff; border:1px solid var(--line); border-radius:14px; padding:38px 34px;
+    box-shadow:0 10px 30px rgba(21,42,74,.05);
+  }
+  .mv-ic{
+    width:52px;height:52px; border-radius:12px; background:var(--teal-dark); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:20px;
+  }
+  .mv-card h3{font-size:21px; margin-bottom:12px;}
+  .mv-card p{color:var(--grey); font-size:15px; line-height:1.8;}
+
+  /* VALUES */
+  .values{padding:20px 0 90px; text-align:center;}
+  .values h2{font-size:34px; max-width:600px; margin:0 auto 46px;}
+  .values-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:26px;}
+  .value-card{background:#fff; border:1px solid var(--line); border-radius:14px; padding:32px 22px;}
+  .value-ic{
+    width:56px; height:56px; border-radius:50%; background:#eef4f6; color:var(--teal-dark);
+    display:flex; align-items:center; justify-content:center; font-size:24px; margin:0 auto 18px;
+  }
+  .value-card h3{font-size:16.5px; margin-bottom:10px;}
+  .value-card p{color:var(--grey); font-size:13.5px; line-height:1.7;}
+
+  /* TEAM STRIP */
+  .approach{padding:20px 0 90px;}
+  .approach-grid{display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center;}
+  .approach h2{font-size:34px; margin-bottom:26px;}
+  .step{display:flex; gap:16px; padding:18px 0; border-bottom:1px solid var(--line);}
+  .step:first-child{padding-top:0;}
+  .step-num{
+    flex:none; width:34px; height:34px; border-radius:50%; background:var(--navy);
+    color:#fff; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700;
+  }
+  .step h4{font-size:16px; margin-bottom:6px;}
+  .step p{color:var(--grey); font-size:14px; line-height:1.7;}
+  .approach-photo{border-radius:14px; overflow:hidden; height:440px;}
+  .approach-photo img{width:100%; height:100%; object-fit:cover;}
+
+  /* CTA */
+  .cta{background:var(--navy); padding:60px 0; text-align:center;}
+  .cta h2{color:#fff; font-size:30px; margin-bottom:14px;}
+  .cta p{color:#c7d0dd; font-size:15.5px; margin-bottom:28px;}
+  .btn{
+    display:inline-block; padding:16px 34px; border-radius:6px; font-size:15px; font-weight:600;
+    background:var(--orange); color:#fff;
+  }
+
+  /* FOOTER */
+  footer{background:var(--navy); color:#c7d0dd; padding:70px 0 26px;}
+  .foot-grid{display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:40px; margin-bottom:50px;}
+  .foot-logo img{height:64px; width:auto; margin-bottom:20px;}
+  footer p{font-size:14.5px; line-height:1.8; color:#a9b4c5; max-width:280px;}
+  .foot-contact{display:flex; align-items:center; gap:10px; margin-top:16px; font-size:14.5px; color:#c7d0dd;}
+  footer h4{color:#fff; font-family:'Jost',sans-serif; font-weight:700; font-size:17px; margin-bottom:22px;}
+  .foot-links{display:flex; flex-direction:column; gap:14px;}
+  .foot-links a{font-size:14.5px; color:#a9b4c5; display:flex; align-items:center; gap:6px;}
+  .foot-links a:hover{color:#fff;}
+  .foot-bottom{
+    border-top:1px solid rgba(255,255,255,.12); padding-top:24px;
+    display:flex; justify-content:space-between; align-items:center; font-size:13.5px; color:#8ea0b8;
+  }
+  .socials{display:flex; gap:14px;}
+  .socials span{
+    width:30px;height:30px;border:1px solid rgba(255,255,255,.25); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:12px; color:#c7d0dd;
+  }
+
+  @media(max-width:940px){
+    .story-grid, .mv-grid, .approach-grid, .foot-grid{grid-template-columns:1fr;}
+    .values-grid{grid-template-columns:1fr 1fr;}
+    .stat-row{grid-template-columns:1fr; gap:14px;}
+    nav{
+      display:none; position:absolute; top:100%; left:0; right:0; background:#fff;
+      flex-direction:column; gap:0; padding:10px 0; box-shadow:0 12px 24px rgba(21,42,74,.12); z-index:40;
+    }
+    nav.open{display:flex;}
+    nav a{padding:14px 32px; width:100%;}
+    nav a.active::after{display:none;}
+    nav a.active{background:#f3f5f2;}
+    .hamburger{display:flex;}
+    header{position:relative;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    .banner-inner h1{font-size:30px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <div class="logo">
+      <img src="https://orchid-hippopotamus-237502.hostingersite.com/wp-content/uploads/2026/07/6f3552e7-ed33-4e20-9df2-e459625993d7-e1784097760874.png" alt="PEPL logo">
+    </div>
+    <nav id="mainNav">
+      <a href="pitabash-enterprises.html">Home</a>
+      <a href="about.html" class="active">About</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="pitabash-enterprises.html#contact">Contact</a>
+    </nav>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="page-banner">
+  <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784283803/unnamed_4_gticwe.webp" alt="Pitabash Enterprises">
+  <div class="banner-inner">
+    <h1>About Us</h1>
+    <div class="breadcrumb"><a href="pitabash-enterprises.html">Home</a><span>/</span>About</div>
+  </div>
+</section>
+
+<section class="story">
+  <div class="wrap story-grid">
+    <div>
+      <div class="eyebrow">Who We Are</div>
+      <h2>Creating Safer, Smarter Spaces For Children Since 2021</h2>
+      <p>Pitabash Enterprises Private Limited was founded with a simple belief: every child deserves a space that is safe to explore, creative enough to inspire, and built to last. What started as a small initiative in Odisha has grown into a trusted name in child-friendly infrastructure.</p>
+      <p>We work hand-in-hand with government bodies, schools, crèches, and private families to design and install indoor play zones, outdoor playgrounds, and educational spaces — using premium, child-safe materials at every stage.</p>
+      <p>From the first concept sketch to final installation and ongoing maintenance, our team stays involved throughout, because a play space is only as good as the care that goes into building it.</p>
+      <div class="stat-row">
+        <div class="stat-box"><div class="num">2021</div><div class="label">Founded</div></div>
+        <div class="stat-box"><div class="num">50+</div><div class="label">Projects Delivered</div></div>
+        <div class="stat-box"><div class="num">100%</div><div class="label">Child-Safe Materials</div></div>
+      </div>
+    </div>
+    <div class="story-photo">
+      <img src="https://orchid-hippopotamus-237502.hostingersite.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2026-07-07-at-18.49.40-rqfk6hwtqn6rr7y9mv7805asue3748jxa0p86x7cf4.jpeg" alt="Pitabash Enterprises play space">
+    </div>
+  </div>
+</section>
+
+<section class="mv">
+  <div class="wrap mv-grid">
+    <div class="mv-card">
+      <div class="mv-ic">🎯</div>
+      <h3>Our Mission</h3>
+      <p>To design and deliver safe, creative, and child-friendly infrastructure that empowers every child to learn, play, and grow — while giving schools, institutions, and families complete peace of mind through quality materials and expert execution.</p>
+    </div>
+    <div class="mv-card">
+      <div class="mv-ic">🔭</div>
+      <h3>Our Vision</h3>
+      <p>To become Odisha's most trusted name in child care infrastructure, setting the standard for safety and innovation in every playground, crèche, and educational space we build across the region.</p>
+    </div>
+  </div>
+</section>
+
+<section class="values">
+  <div class="wrap">
+    <h2>What We Stand For</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-ic">🛡️</div>
+        <h3>Safety First</h3>
+        <p>Every material and design choice is vetted for child safety before it reaches a single project.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-ic">🎨</div>
+        <h3>Creativity</h3>
+        <p>We design spaces that spark imagination, not just fill a room with equipment.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-ic">🤝</div>
+        <h3>Trust</h3>
+        <p>We work transparently with schools, government bodies, and families at every step.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-ic">⚙️</div>
+        <h3>Quality</h3>
+        <p>End-to-end execution, from design to maintenance, held to a consistent standard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="approach">
+  <div class="wrap approach-grid">
+    <div>
+      <h2>How We Work</h2>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <h4>Consultation &amp; Site Visit</h4>
+          <p>We understand your space, audience, and goals before proposing a single design.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <h4>Design &amp; Material Selection</h4>
+          <p>Custom layouts using premium, certified child-safe materials suited to your space.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <h4>Installation</h4>
+          <p>Our trained team handles setup end-to-end, with minimal disruption to your operations.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <h4>Ongoing Support</h4>
+          <p>Regular maintenance and support to keep every space safe for years to come.</p>
+        </div>
+      </div>
+    </div>
+    <div class="approach-photo">
+      <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784283803/unnamed_6_wwgzgo.webp" alt="Pitabash Enterprises process">
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>Ready to Build Something Great For Kids?</h2>
+    <p>Let's talk about your space and how we can bring it to life.</p>
+    <a href="pitabash-enterprises.html#contact" class="btn">Contact Us</a>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">
+          <img src="https://orchid-hippopotamus-237502.hostingersite.com/wp-content/uploads/2026/07/6f3552e7-ed33-4e20-9df2-e459625993d7-e1784097760874.png" alt="PEPL logo">
+        </div>
+        <p>Pitabash Enterprises Private Limited is dedicated to creating safe, engaging, and development-oriented spaces for children through innovative products, playgrounds, crèches, and educational infrastructure solutions.</p>
+        <div class="foot-contact"><span>✉</span> info@pitabash.com</div>
+        <div class="foot-contact"><span>☎</span> +91 XXXXX XXXXX</div>
+        <div class="foot-contact"><span>📍</span> Bhubaneswar, Odisha, India</div>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <div class="foot-links">
+          <a href="pitabash-enterprises.html">Welcome Home →</a>
+          <a href="about.html">About Us →</a>
+          <a href="gallery.html">Gallery →</a>
+          <a href="pitabash-enterprises.html#locations">Our Stores →</a>
+        </div>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <div class="foot-links">
+          <a href="#">Our Service →</a>
+          <a href="#">Testimonials →</a>
+          <a href="#">Blog Stories →</a>
+          <a href="pitabash-enterprises.html#contact">Contact Us →</a>
+        </div>
+      </div>
+      <div>
+        <h4>Get Direction</h4>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>Copyright © 2023. All rights reserved</span>
+      <div class="socials">
+        <span>𝕏</span><span>◎</span><span>▶</span><span>f</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    const btn = document.getElementById('hamburgerBtn');
+    const nav = document.getElementById('mainNav');
+    if(!btn || !nav) return;
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('open');
+      nav.classList.toggle('open');
+    });
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        btn.classList.remove('open');
+        nav.classList.remove('open');
+      });
+    });
+  })();
+</script>
+</body>
+</html>

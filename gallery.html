@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery | Pitabash Enterprises</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#152a4a;
+    --navy-soft:#2c4468;
+    --teal:#1c5d78;
+    --teal-dark:#134759;
+    --orange:#f2801f;
+    --cream:#fbf9f5;
+    --grey:#6c7688;
+    --line:#e8e6df;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Jost','Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;
+    color:var(--navy);
+    background:var(--cream);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Jost',sans-serif; font-weight:700; color:var(--navy); line-height:1.15;}
+  a{text-decoration:none; color:inherit;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+
+  /* HEADER */
+  header{padding:14px 0;}
+  .header-inner{display:flex; align-items:center; justify-content:space-between;}
+  .logo img{height:88px; width:auto;}
+  nav{display:flex; gap:38px; font-size:15px; font-weight:500; color:var(--navy-soft);}
+  nav a{position:relative; padding-bottom:4px;}
+  nav a.active{color:var(--navy); font-weight:700;}
+  nav a.active::after{content:""; position:absolute; left:0; bottom:0; width:100%; height:2px; background:var(--orange);}
+  .hamburger{
+    display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px; z-index:50;
+  }
+  .hamburger span{width:26px; height:2.5px; background:var(--navy); border-radius:2px; transition:transform .25s ease, opacity .25s ease;}
+  .hamburger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg);}
+
+  /* PAGE BANNER */
+  .page-banner{
+    position:relative; height:260px; overflow:hidden;
+    display:flex; align-items:center; justify-content:center; text-align:center;
+  }
+  .page-banner img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+  .page-banner::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(0deg, rgba(21,42,74,.82), rgba(21,42,74,.6));
+  }
+  .banner-inner{position:relative; z-index:2; color:#fff;}
+  .banner-inner h1{color:#fff; font-size:42px; margin-bottom:10px;}
+  .breadcrumb{font-size:14px; color:#dbe3ee;}
+  .breadcrumb a{color:#fff; font-weight:600;}
+  .breadcrumb span{margin:0 8px; opacity:.6;}
+
+  /* FILTERS */
+  .filters{padding:50px 0 10px; text-align:center;}
+  .filters .sub{color:var(--grey); font-size:15.5px; max-width:540px; margin:0 auto 30px;}
+  .filter-tabs{display:flex; justify-content:center; gap:12px; flex-wrap:wrap;}
+  .filter-tab{
+    padding:10px 22px; border-radius:30px; border:1px solid var(--line); background:#fff;
+    font-size:14px; font-weight:600; color:var(--navy-soft); cursor:pointer; transition:all .2s ease;
+  }
+  .filter-tab:hover{border-color:var(--teal-dark); color:var(--teal-dark);}
+  .filter-tab.active{background:var(--teal-dark); color:#fff; border-color:var(--teal-dark);}
+
+  /* GALLERY GRID */
+  .gallery-section{padding:40px 0 90px;}
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    grid-auto-rows:190px;
+    gap:16px;
+  }
+  .gallery-item{
+    border-radius:12px; overflow:hidden; position:relative; cursor:pointer;
+    opacity:0; animation:fadeIn .5s ease forwards;
+  }
+  .gallery-item img{width:100%; height:100%; object-fit:cover; transition:transform .4s ease;}
+  .gallery-item:hover img{transform:scale(1.08);}
+  .gallery-item.tall{grid-row:span 2;}
+  .gallery-item.wide{grid-column:span 2;}
+  .gallery-item .tag{
+    position:absolute; left:12px; bottom:12px; z-index:2; color:#fff; font-size:12.5px; font-weight:600;
+    background:rgba(21,42,74,.55); padding:5px 12px; border-radius:20px; backdrop-filter:blur(2px);
+  }
+  .gallery-item.hidden{display:none;}
+  @keyframes fadeIn{ to{opacity:1;} }
+
+  /* LIGHTBOX */
+  .lightbox{
+    position:fixed; inset:0; background:rgba(21,42,74,.92); z-index:100;
+    display:none; align-items:center; justify-content:center; padding:40px;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{max-width:90vw; max-height:85vh; border-radius:8px; box-shadow:0 20px 60px rgba(0,0,0,.4);}
+  .lightbox-close{
+    position:absolute; top:26px; right:34px; color:#fff; font-size:34px; cursor:pointer; line-height:1;
+  }
+  .lightbox-nav{
+    position:absolute; top:50%; transform:translateY(-50%); color:#fff; font-size:38px; cursor:pointer;
+    width:50px; height:50px; display:flex; align-items:center; justify-content:center;
+  }
+  .lightbox-nav.prev{left:16px;}
+  .lightbox-nav.next{right:16px;}
+
+  /* CTA */
+  .cta{background:var(--navy); padding:60px 0; text-align:center;}
+  .cta h2{color:#fff; font-size:30px; margin-bottom:14px;}
+  .cta p{color:#c7d0dd; font-size:15.5px; margin-bottom:28px;}
+  .btn{
+    display:inline-block; padding:16px 34px; border-radius:6px; font-size:15px; font-weight:600;
+    background:var(--orange); color:#fff;
+  }
+
+  /* FOOTER */
+  footer{background:var(--navy); color:#c7d0dd; padding:70px 0 26px;}
+  .foot-grid{display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:40px; margin-bottom:50px;}
+  .foot-logo img{height:64px; width:auto; margin-bottom:20px;}
+  footer p{font-size:14.5px; line-height:1.8; color:#a9b4c5; max-width:280px;}
+  .foot-contact{display:flex; align-items:center; gap:10px; margin-top:16px; font-size:14.5px; color:#c7d0dd;}
+  footer h4{color:#fff; font-family:'Jost',sans-serif; font-weight:700; font-size:17px; margin-bottom:22px;}
+  .foot-links{display:flex; flex-direction:column; gap:14px;}
+  .foot-links a{font-size:14.5px; color:#a9b4c5; display:flex; align-items:center; gap:6px;}
+  .foot-links a:hover{color:#fff;}
+  .foot-bottom{
+    border-top:1px solid rgba(255,255,255,.12); padding-top:24px;
+    display:flex; justify-content:space-between; align-items:center; font-size:13.5px; color:#8ea0b8;
+  }
+  .socials{display:flex; gap:14px;}
+  .socials span{
+    width:30px;height:30px;border:1px solid rgba(255,255,255,.25); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:12px; color:#c7d0dd;
+  }
+
+  @media(max-width:940px){
+    nav{
+      display:none; position:absolute; top:100%; left:0; right:0; background:#fff;
+      flex-direction:column; gap:0; padding:10px 0; box-shadow:0 12px 24px rgba(21,42,74,.12); z-index:40;
+    }
+    nav.open{display:flex;}
+    nav a{padding:14px 32px; width:100%;}
+    nav a.active::after{display:none;}
+    nav a.active{background:#f3f5f2;}
+    .hamburger{display:flex;}
+    header{position:relative;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    .banner-inner h1{font-size:30px;}
+    .gallery-grid{grid-template-columns:repeat(2,1fr); grid-auto-rows:150px;}
+    .gallery-item.wide{grid-column:span 2;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <div class="logo">
+      <img src="https://orchid-hippopotamus-237502.hostingersite.com/wp-content/uploads/2026/07/6f3552e7-ed33-4e20-9df2-e459625993d7-e1784097760874.png" alt="PEPL logo">
+    </div>
+    <nav id="mainNav">
+      <a href="pitabash-enterprises.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="gallery.html" class="active">Gallery</a>
+      <a href="pitabash-enterprises.html#contact">Contact</a>
+    </nav>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="page-banner">
+  <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784284116/WhatsApp_Image_2026-07-08_at_08.11.36_kheia3.jpg" alt="Pitabash Enterprises Gallery">
+  <div class="banner-inner">
+    <div class="breadcrumb"><a href="pitabash-enterprises.html">Home</a><span>/</span>Gallery</div>
+  </div>
+</section>
+
+<section class="filters">
+  <div class="wrap">
+    <p class="sub">A look inside the play spaces, crèches, learning corners, and stores Pitabash Enterprises has brought to life across Odisha.</p>
+    <div class="filter-tabs" id="filterTabs">
+      <button class="filter-tab active" data-filter="all">All</button>
+      <button class="filter-tab" data-filter="play">Play Spaces</button>
+      <button class="filter-tab" data-filter="store">Stores</button>
+      <button class="filter-tab" data-filter="wapcos">WAPCOS Limited</button>
+      <button class="filter-tab" data-filter="aganwadi">Aganwadi</button>
+      <button class="filter-tab" data-filter="blueprint">Blueprint Signature</button>
+    </div>
+  </div>
+</section>
+
+<section class="gallery-section">
+  <div class="wrap">
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-item" data-cat="play">
+        <img src="https://orchid-hippopotamus-237502.hostingersite.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2026-07-07-at-18.49.40-rqfk6hwtqn6rr7y9mv7805asue3748jxa0p86x7cf4.jpeg" alt="Indoor play zone">
+      </div>
+      <div class="gallery-item" data-cat="play">
+        <img src="https://orchid-hippopotamus-237502.hostingersite.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2026-07-07-at-18.49.34-rqfk6c9xh24s9kte7g851i3hffpih2sesf4zwvclkw.jpeg" alt="Crèche setup">
+      </div>
+      <div class="gallery-item" data-cat="play">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784284116/WhatsApp_Image_2026-07-08_at_08.11.36_kheia3.jpg" alt="On-site delivery">
+      </div>
+      <div class="gallery-item" data-cat="play">
+        <img src="https://orchid-hippopotamus-237502.hostingersite.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2026-07-07-at-18.49.41-rqfk6iuquqb9rek5cc7o8dybruoslskwp25zmdpapc.jpeg" alt="Educational corner">
+      </div>
+      <div class="gallery-item" data-cat="play">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784283803/unnamed_6_wwgzgo.webp" alt="Colorful flooring">
+      </div>
+      <div class="gallery-item" data-cat="play">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784283803/unnamed_4_gticwe.webp" alt="Childhood experience">
+      </div>
+      <div class="gallery-item" data-cat="store">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784282014/IMG_20260717_120131_695.jpg_yhc3kg.jpg" alt="Ohh Baby BBSR store">
+      </div>
+      <div class="gallery-item" data-cat="store">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/f_auto,q_auto/v1784282011/IMG_4819_yslth9.heic" alt="Ohh Baby Jagamara store">
+      </div>
+      <div class="gallery-item" data-cat="store">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784282014/IMG_20260717_120153_312.jpg_yjqzif.jpg" alt="Store interior">
+      </div>
+
+      <!-- WAPCOS Limited -->
+      <div class="gallery-item" data-cat="wapcos">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784366519/WhatsApp_Image_2026-07-08_at_08.11.38_yxhbwp.jpg" alt="WAPCOS Limited project">
+      </div>
+      <div class="gallery-item" data-cat="wapcos">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784284116/WhatsApp_Image_2026-07-08_at_08.11.36_kheia3.jpg" alt="WAPCOS Limited project">
+      </div>
+      <div class="gallery-item" data-cat="wapcos">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784284116/WhatsApp_Image_2026-07-08_at_08.11.37_ozcxaw.jpg" alt="WAPCOS Limited project">
+      </div>
+
+      <!-- Aganwadi -->
+      <div class="gallery-item" data-cat="aganwadi">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784366856/20260203_122507_aa8dcp.jpg" alt="Aganwadi project">
+      </div>
+      <div class="gallery-item" data-cat="aganwadi">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784366849/20260131_172533_qasrtp.jpg" alt="Aganwadi project">
+      </div>
+      <div class="gallery-item" data-cat="aganwadi">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784366849/20260131_140659_efopnl.jpg" alt="Aganwadi project">
+      </div>
+      <div class="gallery-item" data-cat="aganwadi">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784366849/20260205_100639_gqvz2h.jpg" alt="Aganwadi project">
+      </div>
+      <div class="gallery-item" data-cat="aganwadi">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784366846/20260122_150502_ixunnv.jpg" alt="Aganwadi project">
+      </div>
+      <div class="gallery-item" data-cat="aganwadi">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784366756/20260122_150502_errpcb.jpg" alt="Aganwadi project">
+      </div>
+
+      <!-- Blueprint Signature -->
+      <div class="gallery-item" data-cat="blueprint">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784367239/WhatsApp_Image_2026-06-11_at_10.41.29_jbrvju.jpg" alt="Blueprint Signature project">
+      </div>
+      <div class="gallery-item" data-cat="blueprint">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784367239/WhatsApp_Image_2026-06-11_at_10.41.29_1_xfxthk.jpg" alt="Blueprint Signature project">
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lightboxClose">✕</span>
+  <span class="lightbox-nav prev" id="lightboxPrev">‹</span>
+  <img id="lightboxImg" src="" alt="">
+  <span class="lightbox-nav next" id="lightboxNext">›</span>
+</div>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>Have A Space You'd Like Us To Transform?</h2>
+    <p>Get in touch and let's design something children will love.</p>
+    <a href="pitabash-enterprises.html#contact" class="btn">Contact Us</a>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">
+          <img src="https://orchid-hippopotamus-237502.hostingersite.com/wp-content/uploads/2026/07/6f3552e7-ed33-4e20-9df2-e459625993d7-e1784097760874.png" alt="PEPL logo">
+        </div>
+        <p>Pitabash Enterprises Private Limited is dedicated to creating safe, engaging, and development-oriented spaces for children through innovative products, playgrounds, crèches, and educational infrastructure solutions.</p>
+        <div class="foot-contact"><span>✉</span> info@pitabash.com</div>
+        <div class="foot-contact"><span>☎</span> +91 XXXXX XXXXX</div>
+        <div class="foot-contact"><span>📍</span> Bhubaneswar, Odisha, India</div>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <div class="foot-links">
+          <a href="pitabash-enterprises.html">Welcome Home →</a>
+          <a href="about.html">About Us →</a>
+          <a href="gallery.html">Gallery →</a>
+          <a href="pitabash-enterprises.html#locations">Our Stores →</a>
+        </div>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <div class="foot-links">
+          <a href="#">Our Service →</a>
+          <a href="#">Testimonials →</a>
+          <a href="#">Blog Stories →</a>
+          <a href="pitabash-enterprises.html#contact">Contact Us →</a>
+        </div>
+      </div>
+      <div>
+        <h4>Get Direction</h4>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>Copyright © 2023. All rights reserved</span>
+      <div class="socials">
+        <span>𝕏</span><span>◎</span><span>▶</span><span>f</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Hamburger toggle
+  (function(){
+    const btn = document.getElementById('hamburgerBtn');
+    const nav = document.getElementById('mainNav');
+    if(!btn || !nav) return;
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('open');
+      nav.classList.toggle('open');
+    });
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        btn.classList.remove('open');
+        nav.classList.remove('open');
+      });
+    });
+  })();
+
+  // Filter tabs
+  (function(){
+    const tabs = document.querySelectorAll('.filter-tab');
+    const items = document.querySelectorAll('.gallery-item');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const filter = tab.dataset.filter;
+        items.forEach(item => {
+          if(filter === 'all' || item.dataset.cat === filter){
+            item.classList.remove('hidden');
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+      });
+    });
+  })();
+
+  // Lightbox
+  (function(){
+    const items = Array.from(document.querySelectorAll('.gallery-item'));
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const closeBtn = document.getElementById('lightboxClose');
+    const prevBtn = document.getElementById('lightboxPrev');
+    const nextBtn = document.getElementById('lightboxNext');
+    let current = 0;
+
+    function openAt(i){
+      current = i;
+      const img = items[current].querySelector('img');
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('open');
+    }
+    function close(){ lightbox.classList.remove('open'); }
+    function nav(dir){
+      let i = current;
+      do{
+        i = (i + dir + items.length) % items.length;
+      } while(items[i].classList.contains('hidden') && i !== current);
+      openAt(i);
+    }
+
+    items.forEach((item, i) => {
+      item.addEventListener('click', () => openAt(i));
+    });
+    closeBtn.addEventListener('click', close);
+    lightbox.addEventListener('click', (e) => { if(e.target === lightbox) close(); });
+    prevBtn.addEventListener('click', () => nav(-1));
+    nextBtn.addEventListener('click', () => nav(1));
+    document.addEventListener('keydown', (e) => {
+      if(!lightbox.classList.contains('open')) return;
+      if(e.key === 'Escape') close();
+      if(e.key === 'ArrowLeft') nav(-1);
+      if(e.key === 'ArrowRight') nav(1);
+    });
+  })();
+</script>
+</body>
+</html>

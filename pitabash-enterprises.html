@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pitabash Enterprises | Building Safe, Creative & Inspiring Spaces For Every Child</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#152a4a;
+    --navy-soft:#2c4468;
+    --teal:#1c5d78;
+    --teal-dark:#134759;
+    --orange:#f2801f;
+    --cream:#fbf9f5;
+    --paper:#ffffff;
+    --grey:#6c7688;
+    --line:#e8e6df;
+    --mat-red:#e14b3f;
+    --mat-yellow:#f2b705;
+    --mat-green:#3fa34d;
+    --mat-blue:#2e6fa7;
+    --mat-orange:#f2801f;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Jost', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    color:var(--navy);
+    background:var(--cream);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Jost', Georgia,'Times New Roman',serif;
+    font-weight:700;
+    color:var(--navy);
+    line-height:1.15;
+  }
+  a{text-decoration:none; color:inherit;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+
+  /* ===== HEADER ===== */
+  header{
+    padding:14px 0;
+  }
+  .header-inner{display:flex; align-items:center; justify-content:space-between;}
+  .logo{display:flex; align-items:center; gap:10px;}
+  .logo-mark{
+    width:38px;height:44px;
+    background:linear-gradient(160deg,#3fb8c9,var(--navy));
+    clip-path:polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .logo-mark span{color:#fff;font-size:9px;font-weight:800;letter-spacing:1px;}
+  .logo-text{font-family:'Jost',sans-serif; font-weight:800; font-size:22px; letter-spacing:1px; color:var(--navy); line-height:1;}
+  .logo-sub{font-size:9px; letter-spacing:3px; color:var(--grey); margin-top:2px;}
+  nav{display:flex; gap:38px; font-size:15px; font-weight:500; color:var(--navy-soft);}
+  nav a{position:relative; padding-bottom:4px;}
+  nav a.active{color:var(--navy); font-weight:700;}
+  nav a.active::after{
+    content:""; position:absolute; left:0; bottom:0; width:100%; height:2px; background:var(--orange);
+  }
+  .msg-link{display:flex; align-items:center; gap:8px; font-size:15px; color:var(--navy-soft);}
+  .hamburger{
+    display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px; z-index:50;
+  }
+  .hamburger span{width:26px; height:2.5px; background:var(--navy); border-radius:2px; transition:transform .25s ease, opacity .25s ease;}
+  .hamburger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg);}
+
+  /* ===== HERO ===== */
+  .hero{padding:0; position:relative;}
+  .hero-overlay{
+    position:absolute; inset:0; z-index:3;
+    background:linear-gradient(90deg, rgba(21,42,74,.72) 0%, rgba(21,42,74,.45) 45%, rgba(21,42,74,.1) 75%);
+    display:flex; align-items:center;
+  }
+  .hero-content{max-width:560px; padding:0 32px;}
+  .hero-content h1{font-size:56px; margin-bottom:26px; color:#fff;}
+  .hero-content p{font-size:16px; color:#e4e9f2; line-height:1.75; max-width:440px; margin-bottom:34px;}
+  .hero-ctas{display:flex; align-items:center; gap:28px;}
+  .btn{
+    display:inline-block; padding:16px 34px; border-radius:6px; font-size:15px; font-weight:600;
+    background:var(--orange); color:#fff; transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(19,71,89,.28);}
+  .link-arrow{display:flex; align-items:center; gap:10px; font-weight:600; font-size:15px; color:#fff;}
+  .link-arrow .ic{
+    width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.18);
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;
+  }
+
+  /* ===== HERO SLIDER ===== */
+  .slider{
+    position:relative; overflow:hidden; height:640px; width:100%;
+  }
+  .slide{
+    position:absolute; inset:0; opacity:0; transition:opacity 1s ease;
+  }
+  .slide.active{opacity:1;}
+  .slide img{width:100%; height:100%; object-fit:cover;}
+  .slide-caption{
+    position:absolute; left:0; right:0; bottom:0; padding:22px 26px;
+    background:linear-gradient(0deg, rgba(21,42,74,.75), transparent);
+    color:#fff; font-size:14px; font-weight:600; letter-spacing:.3px; z-index:2;
+  }
+  .slider-dots{
+    position:absolute; bottom:26px; right:40px; display:flex; gap:8px; z-index:4;
+  }
+  .slider-dots button{
+    width:9px;height:9px;border-radius:50%; border:none; background:rgba(255,255,255,.55); cursor:pointer; padding:0;
+  }
+  .slider-dots button.active{background:#fff; width:22px; border-radius:5px;}
+  .slider-arrow{
+    position:absolute; top:50%; transform:translateY(-50%); z-index:4;
+    width:38px;height:38px; border-radius:50%; border:none; background:rgba(21,42,74,.55); color:#fff;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px;
+  }
+  .slider-arrow.prev{left:16px;}
+  .slider-arrow.next{right:16px;}
+  .slider-arrow:hover{background:var(--teal-dark);}
+
+  /* ===== STORE LOCATIONS ===== */
+  .locations{padding:20px 0 90px;}
+  .locations h2{font-size:34px; text-align:center; margin-bottom:12px;}
+  .locations .sub{text-align:center; color:var(--grey); font-size:15.5px; max-width:520px; margin:0 auto 46px;}
+  .store-grid{display:grid; grid-template-columns:1fr 1fr; gap:36px;}
+  .store-card{
+    background:#fff; border-radius:14px; overflow:hidden; box-shadow:0 10px 30px rgba(21,42,74,.08);
+    border:1px solid var(--line);
+  }
+  .store-photo{height:230px; overflow:hidden;}
+  .store-photo img{width:100%; height:100%; object-fit:cover;}
+  .store-body{padding:26px 28px 28px;}
+  .store-tag{
+    display:inline-block; font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+    color:var(--orange); margin-bottom:8px;
+  }
+  .store-body h3{font-size:20px; margin-bottom:10px;}
+  .store-address{
+    display:flex; align-items:flex-start; gap:10px; color:var(--grey); font-size:14.5px; line-height:1.7; margin-bottom:20px;
+  }
+  .store-address .pin{flex:none; margin-top:2px;}
+  .direction-btn{
+    display:inline-flex; align-items:center; gap:8px; padding:11px 22px; border-radius:6px;
+    background:var(--teal-dark); color:#fff; font-size:14px; font-weight:600;
+  }
+  .direction-btn:hover{background:var(--navy);}
+
+  /* collage */
+  .collage{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    grid-template-rows:repeat(3, 92px);
+    gap:12px;
+  }
+  .cell{border-radius:8px; overflow:hidden; position:relative;}
+  .cell.a{grid-column:2/4; grid-row:1/3;}
+  .cell.b{grid-column:1/2; grid-row:2/3;}
+  .cell.c{grid-column:1/2; grid-row:1/2; background:var(--mat-orange);}
+  .cell.d{grid-column:1/2; grid-row:3/4;}
+  .cell.e{grid-column:2/3; grid-row:3/4; background:var(--teal);}
+  .cell.f{grid-column:3/4; grid-row:3/4;}
+  .cell.g{grid-column:2/3; grid-row:4/5;}
+
+  .photo-people{
+    width:100%;height:100%;
+    background:
+      radial-gradient(circle at 30% 20%, #cfe4ee 0 18%, transparent 19%),
+      linear-gradient(#dcecf3,#dcecf3);
+    position:relative; overflow:hidden;
+  }
+  .checker{
+    width:100%; height:100%;
+    background-image:
+      linear-gradient(45deg, transparent 49%, rgba(0,0,0,.04) 50%, transparent 51%);
+    background-size:14px 14px;
+  }
+  .mat{
+    position:absolute; left:0; right:0; bottom:0; height:55%;
+    background-image:
+      repeating-linear-gradient(90deg,
+        var(--mat-red) 0 20%, var(--mat-yellow) 0 40%,
+        var(--mat-green) 0 60%, var(--mat-blue) 0 80%, var(--mat-orange) 0 100%);
+    background-size:60px 100%;
+  }
+  .wall{position:absolute; top:0; left:0; right:0; bottom:45%; background:#e7f2f6;}
+  .figures{position:absolute; bottom:6%; left:8%; right:8%; height:38%; display:flex; align-items:flex-end; gap:6px;}
+  .fig{flex:1; border-radius:6px 6px 0 0; opacity:.85;}
+  .rainbow{position:absolute; top:20%; left:50%; transform:translateX(-50%); width:60%; height:40%;
+    border:6px solid transparent; border-top-color:#e14b3f; border-radius:50% 50% 0 0;
+    box-shadow: inset 0 0 0 6px #f2b705, inset 0 0 0 12px #3fa34d, inset 0 0 0 18px #2e6fa7;
+  }
+
+  /* ===== ABOUT ===== */
+  .about{padding:70px 0;}
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:start;}
+  .eyebrow{font-size:13px; letter-spacing:2px; color:var(--orange); font-weight:700; text-transform:uppercase; margin-bottom:10px;}
+  .about h2{font-size:34px; margin-bottom:18px;}
+  .about p{color:var(--grey); font-size:15.5px; line-height:1.8;}
+  .check-list{display:flex; flex-direction:column; gap:30px; padding-top:6px;}
+  .check-item{display:flex; align-items:center; gap:16px; font-size:16px; font-weight:700; color:var(--navy);}
+  .check-ic{
+    flex:none; width:26px;height:26px;border-radius:50%;background:var(--teal-dark);
+    color:#fff; display:flex; align-items:center; justify-content:center; font-size:12px;
+  }
+
+  /* ===== MISSION / VISION ===== */
+  .mv{padding:20px 0 70px;}
+  .mv-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
+  .mv-card{
+    background:#fff; border:1px solid var(--line); border-radius:14px; padding:38px 34px;
+    box-shadow:0 10px 30px rgba(21,42,74,.05);
+  }
+  .mv-ic{
+    width:52px;height:52px; border-radius:12px; background:var(--teal-dark); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:20px;
+  }
+  .mv-card h3{font-size:21px; margin-bottom:12px;}
+  .mv-card p{color:var(--grey); font-size:15px; line-height:1.8;}
+
+  /* ===== WHY SECTION ===== */
+  .why{padding:50px 0 90px; text-align:center;}
+  .why h2{font-size:34px; max-width:600px; margin:0 auto 46px;}
+  .why-panel{background:#eef0ee; border-radius:16px; padding:60px 40px 30px;}
+  .why-cards{display:grid; grid-template-columns:repeat(3,1fr); gap:40px;}
+  .why-illo{
+    width:170px;height:170px; margin:0 auto 26px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .why-illo img{width:100%; height:100%; object-fit:contain;}
+  .why-cards h3{font-size:19px; margin-bottom:12px;}
+  .why-cards p{color:var(--grey); font-size:14.5px; line-height:1.7; max-width:250px; margin:0 auto;}
+
+  /* ===== CHILDHOOD SECTION ===== */
+  .childhood{padding:40px 0 90px;}
+  .childhood-grid{display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center;}
+  .childhood h2{font-size:34px; margin-bottom:34px;}
+  .feature{padding:22px 0; border-bottom:1px solid var(--line);}
+  .feature:first-child{padding-top:0;}
+  .feature-title{display:flex; align-items:center; gap:12px; font-weight:700; font-size:16.5px; margin-bottom:10px; color:var(--navy);}
+  .feature-ic{
+    width:26px;height:26px;background:var(--teal-dark); border-radius:6px;
+    display:flex;align-items:center;justify-content:center; color:#fff; font-size:12px; flex:none;
+  }
+  .feature p{color:var(--grey); font-size:15px; line-height:1.75; margin-left:38px;}
+  .childhood-photo{border-radius:12px; overflow:hidden; height:420px; background:#12283c; position:relative;}
+  .classroom{
+    width:100%;height:100%;
+    background:
+      linear-gradient(180deg, #1c3a52 0%, #1c3a52 55%, #1a1a1a 55%, #1a1a1a 100%);
+    position:relative;
+  }
+  .classroom .poster{position:absolute; background:#e9dcc3; border-radius:3px;}
+
+  /* ===== GALLERY ===== */
+  .gallery-section{padding:20px 0 90px;}
+  .gallery-section h2{font-size:34px; text-align:center; margin-bottom:12px;}
+  .gallery-section .sub{text-align:center; color:var(--grey); font-size:15.5px; max-width:520px; margin:0 auto 44px;}
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    grid-auto-rows:160px;
+    gap:14px;
+  }
+  .gallery-item{border-radius:10px; overflow:hidden; position:relative; cursor:pointer;}
+  .gallery-item img{width:100%; height:100%; object-fit:cover; transition:transform .4s ease;}
+  .gallery-item:hover img{transform:scale(1.08);}
+  .gallery-item.tall{grid-row:span 2;}
+  .gallery-item.wide{grid-column:span 2;}
+
+  /* ===== TESTIMONIAL ===== */
+  .testimonial{padding:20px 0 100px;}
+  .test-grid{display:grid; grid-template-columns:1.1fr 1fr; gap:60px; align-items:center;}
+  .test-photo{border-radius:12px; overflow:hidden; height:420px;}
+  .stars{color:var(--orange); font-size:18px; letter-spacing:3px; margin-bottom:20px;}
+  .testimonial h2{font-size:32px; margin-bottom:26px;}
+  .test-slider{position:relative; min-height:210px;}
+  .test-slide{position:absolute; inset:0; opacity:0; visibility:hidden; transition:opacity .6s ease;}
+  .test-slide.active{opacity:1; visibility:visible; position:relative;}
+  .quote{font-size:16px; color:var(--navy-soft); line-height:1.8; font-style:italic; max-width:440px; margin-bottom:24px; position:relative;}
+  .quote-mark{font-family:'Jost',serif; font-size:60px; color:#d7e2e8; float:right; line-height:0; margin-top:30px;}
+  .quote-name{font-weight:700; font-size:15px;}
+  .quote-role{color:var(--grey); font-size:14px;}
+  .test-dots{display:flex; gap:8px; margin-top:30px;}
+  .test-dots button{
+    width:9px;height:9px;border-radius:50%; border:none; background:#d8dde5; cursor:pointer; padding:0;
+  }
+  .test-dots button.active{background:var(--teal-dark); width:22px; border-radius:5px;}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--navy); color:#c7d0dd; padding:70px 0 26px;}
+  .foot-grid{display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:40px; margin-bottom:50px;}
+  .foot-logo{display:flex; align-items:center; gap:10px; margin-bottom:20px;}
+  .foot-logo .logo-text{color:#fff;}
+  footer p{font-size:14.5px; line-height:1.8; color:#a9b4c5; max-width:280px;}
+  .foot-contact{display:flex; align-items:center; gap:10px; margin-top:16px; font-size:14.5px; color:#c7d0dd;}
+  .foot-ic{width:16px;}
+  footer h4{color:#fff; font-family:'Jost',sans-serif; font-weight:700; font-size:17px; margin-bottom:22px;}
+  .foot-links{display:flex; flex-direction:column; gap:14px;}
+  .foot-links a{font-size:14.5px; color:#a9b4c5; display:flex; align-items:center; gap:6px;}
+  .foot-links a:hover{color:#fff;}
+  .foot-bottom{
+    border-top:1px solid rgba(255,255,255,.12); padding-top:24px;
+    display:flex; justify-content:space-between; align-items:center; font-size:13.5px; color:#8ea0b8;
+  }
+  .socials{display:flex; gap:14px;}
+  .socials span{
+    width:30px;height:30px;border:1px solid rgba(255,255,255,.25); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:12px; color:#c7d0dd;
+  }
+
+  @media(max-width:940px){
+    .about-grid, .childhood-grid, .test-grid, .why-cards, .foot-grid, .store-grid, .mv-grid{grid-template-columns:1fr;}
+    .hero-content h1{font-size:34px;}
+    .hero-content{max-width:100%;}
+    .hero-overlay{background:linear-gradient(180deg, rgba(21,42,74,.35), rgba(21,42,74,.85));}
+    nav{
+      display:none; position:absolute; top:100%; left:0; right:0; background:#fff;
+      flex-direction:column; gap:0; padding:10px 0; box-shadow:0 12px 24px rgba(21,42,74,.12); z-index:40;
+    }
+    nav.open{display:flex;}
+    nav a{padding:14px 32px; width:100%;}
+    nav a.active::after{display:none;}
+    nav a.active{background:#f3f5f2;}
+    .hamburger{display:flex;}
+    header{position:relative;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    .collage{grid-template-rows:repeat(3,72px);}
+    .slider{height:480px;}
+    .gallery-grid{grid-template-columns:repeat(2,1fr); grid-auto-rows:130px;}
+    .gallery-item.wide{grid-column:span 2;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <div class="logo">
+      <img src="https://orchid-hippopotamus-237502.hostingersite.com/wp-content/uploads/2026/07/6f3552e7-ed33-4e20-9df2-e459625993d7-e1784097760874.png" alt="PEPL logo" style="height:88px;width:auto;">
+    </div>
+    <nav id="mainNav">
+      <a href="#" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-overlay">
+    <div class="hero-content">
+      <h1>Building Safe, Creative &amp; Inspiring Spaces For Every Child</h1>
+      <p>Pitabash Enterprises Private Limited creates child-friendly environments that nurture learning, creativity, and development. From crèche planning and indoor play zones to outdoor playgrounds and educational solutions.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn">Contact Us</a>
+        <a href="#" class="link-arrow"><span class="ic">🔒</span> Explore Services</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="slider" id="heroSlider">
+    <div class="slide active">
+      <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784284116/WhatsApp_Image_2026-07-08_at_08.11.36_kheia3.jpg" alt="Pitabash Enterprises play space">
+      <div class="slide-caption">On-Site Project Delivery</div>
+    </div>
+    <div class="slide">
+      <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784283803/unnamed_6_wwgzgo.webp" alt="Pitabash Enterprises play space">
+      <div class="slide-caption">Colorful Play Zone Flooring</div>
+    </div>
+    <div class="slide">
+      <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784282013/ChatGPT_Image_Jun_23_2026_08_18_26_PM_gir7ix.png" alt="Pitabash Enterprises play space">
+      <div class="slide-caption">Pitabash Enterprises Showroom</div>
+    </div>
+    <button class="slider-arrow prev" onclick="changeSlide(-1)">‹</button>
+    <button class="slider-arrow next" onclick="changeSlide(1)">›</button>
+    <div class="slider-dots" id="sliderDots"></div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div>
+      <div class="eyebrow">Who We Are</div>
+      <h2>About Pitabash Enterprises</h2>
+      <p>Since 2021, Pitabash Enterprises has been delivering innovative child care products and infrastructure solutions that combine safety, quality, and creativity. Our experienced team works closely with government bodies, educational institutions, corporate organizations, and private clients to create environments where children can learn, play, and thrive.</p>
+    </div>
+    <div class="check-list">
+      <div class="check-item"><span class="check-ic">✓</span> End-to-End Project Execution</div>
+      <div class="check-item"><span class="check-ic">✓</span> Premium Child-Safe Materials</div>
+      <div class="check-item"><span class="check-ic">✓</span> Customized Designs for Every Space</div>
+      <div class="check-item"><span class="check-ic">✓</span> Trusted by Government &amp; Educational Institutions</div>
+    </div>
+  </div>
+</section>
+
+<section class="mv">
+  <div class="wrap mv-grid">
+    <div class="mv-card">
+      <div class="mv-ic">🎯</div>
+      <h3>Our Mission</h3>
+      <p>To design and deliver safe, creative, and child-friendly infrastructure that empowers every child to learn, play, and grow — while giving schools, institutions, and families complete peace of mind through quality materials and expert execution.</p>
+    </div>
+    <div class="mv-card">
+      <div class="mv-ic">🔭</div>
+      <h3>Our Vision</h3>
+      <p>To become Odisha's most trusted name in child care infrastructure, setting the standard for safety and innovation in every playground, crèche, and educational space we build across the region.</p>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="wrap">
+    <h2>Why Our Solutions Make A Difference</h2>
+    <div class="why-panel">
+      <div class="why-cards">
+        <div>
+          <div class="why-illo"><img src="https://orchid-hippopotamus-237502.hostingersite.com/wp-content/uploads/2026/07/feauture_1-e1685504380911.png" alt="Creative Play Spaces"></div>
+          <h3>Creative Play Spaces</h3>
+          <p>We design engaging indoor and outdoor environments that encourage imagination, learning, and physical development.</p>
+        </div>
+        <div>
+          <div class="why-illo"><img src="https://orchid-hippopotamus-237502.hostingersite.com/wp-content/uploads/2026/07/feauture_2.png" alt="Complete Child Care Solutions"></div>
+          <h3>Complete Child Care Solutions</h3>
+          <p>From baby products and educational materials to fully equipped crèches, we provide comprehensive solutions under one roof.</p>
+        </div>
+        <div>
+          <div class="why-illo"><img src="https://orchid-hippopotamus-237502.hostingersite.com/wp-content/uploads/2026/07/feauture_3-e1685504435288.png" alt="Reliable Installation & Support"></div>
+          <h3>Reliable Installation &amp; Support</h3>
+          <p>Our dedicated team ensures professional installation, regular maintenance, and long-term support for every project.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="childhood">
+  <div class="wrap childhood-grid">
+    <div>
+      <h2>Building Better Childhood Experiences Across Odisha</h2>
+      <div class="feature">
+        <div class="feature-title"><span class="feature-ic">▤</span> Comprehensive Child Care Solutions</div>
+        <p>From concept and design to installation and maintenance, we deliver complete child-friendly infrastructure solutions for schools, crèches, and institutions.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-title"><span class="feature-ic">▤</span> Safe, Creative &amp; Child-Friendly Spaces</div>
+        <p>We create vibrant indoor and outdoor play spaces that encourage creativity, learning, physical activity, and joyful experiences for children.</p>
+      </div>
+    </div>
+    <div class="childhood-photo">
+      <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784283803/unnamed_4_gticwe.webp" alt="Pitabash Enterprises play space" style="width:100%;height:100%;object-fit:cover;">
+    </div>
+  </div>
+</section>
+
+<section class="gallery-section" id="gallery">
+  <div class="wrap">
+    <h2>Our Gallery</h2>
+    <p class="sub">A look inside the play spaces, crèches, and learning corners Pitabash Enterprises has brought to life.</p>
+    <div class="gallery-grid">
+      <div class="gallery-item tall">
+        <img src="https://orchid-hippopotamus-237502.hostingersite.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2026-07-07-at-18.49.40-rqfk6hwtqn6rr7y9mv7805asue3748jxa0p86x7cf4.jpeg" alt="Pitabash Enterprises gallery">
+      </div>
+      <div class="gallery-item">
+        <img src="https://orchid-hippopotamus-237502.hostingersite.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2026-07-07-at-18.49.34-rqfk6c9xh24s9kte7g851i3hffpih2sesf4zwvclkw.jpeg" alt="Pitabash Enterprises gallery">
+      </div>
+      <div class="gallery-item wide">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784284116/WhatsApp_Image_2026-07-08_at_08.11.36_kheia3.jpg" alt="Pitabash Enterprises gallery">
+      </div>
+      <div class="gallery-item">
+        <img src="https://orchid-hippopotamus-237502.hostingersite.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2026-07-07-at-18.49.41-rqfk6iuquqb9rek5cc7o8dybruoslskwp25zmdpapc.jpeg" alt="Pitabash Enterprises gallery">
+      </div>
+      <div class="gallery-item">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784283803/unnamed_6_wwgzgo.webp" alt="Pitabash Enterprises gallery">
+      </div>
+      <div class="gallery-item tall">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784283803/unnamed_4_gticwe.webp" alt="Pitabash Enterprises gallery">
+      </div>
+      <div class="gallery-item wide">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784282013/ChatGPT_Image_Jun_23_2026_08_18_26_PM_gir7ix.png" alt="Pitabash Enterprises gallery">
+      </div>
+      <div class="gallery-item">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784282014/IMG_20260717_120153_312.jpg_yjqzif.jpg" alt="Pitabash Enterprises gallery">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonial">
+  <div class="wrap test-grid">
+    <div class="test-photo">
+      <img src="https://orchid-hippopotamus-237502.hostingersite.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2026-07-07-at-18.49.41-rqfk6iuquqb9rek5cc7o8dybruoslskwp25zmdpapc.jpeg" alt="Pitabash Enterprises play space" style="width:100%;height:100%;object-fit:cover;">
+    </div>
+    <div>
+      <h2>Why Clients Choose Pitabash Enterprises</h2>
+      <div class="test-slider" id="testSlider">
+        <div class="test-slide active">
+          <div class="stars">★★★★★</div>
+          <p class="quote"><span class="quote-mark">”</span>We entrusted Pitabash Enterprises with developing our indoor play area, and the results were outstanding. The children love the space, and the safety standards are excellent.</p>
+          <div class="quote-name">Principal,</div>
+          <div class="quote-role">Little Blossoms School</div>
+        </div>
+        <div class="test-slide">
+          <div class="stars">★★★★★</div>
+          <p class="quote"><span class="quote-mark">”</span>From planning to installation, the team was professional at every step. Our crèche now has a colorful, safe play zone that parents constantly compliment.</p>
+          <div class="quote-name">Director,</div>
+          <div class="quote-role">Sunshine Kids Crèche</div>
+        </div>
+        <div class="test-slide">
+          <div class="stars">★★★★★</div>
+          <p class="quote"><span class="quote-mark">”</span>Pitabash handled our entire school playground redesign. The materials feel premium and the finish has held up beautifully through the year.</p>
+          <div class="quote-name">Administrator,</div>
+          <div class="quote-role">Green Valley Public School</div>
+        </div>
+        <div class="test-slide">
+          <div class="stars">★★★★★</div>
+          <p class="quote"><span class="quote-mark">”</span>Their attention to child safety details, from soft flooring to rounded edges, gave us real confidence handing over the project to them.</p>
+          <div class="quote-name">Owner,</div>
+          <div class="quote-role">Tiny Steps Daycare</div>
+        </div>
+        <div class="test-slide">
+          <div class="stars">★★★★★</div>
+          <p class="quote"><span class="quote-mark">”</span>Quick turnaround, transparent pricing, and a beautiful indoor play zone. Pitabash Enterprises made the whole process stress-free for us.</p>
+          <div class="quote-name">Founder,</div>
+          <div class="quote-role">Little Explorers Learning Center</div>
+        </div>
+      </div>
+      <div class="test-dots" id="testDots"></div>
+    </div>
+  </div>
+</section>
+
+<section class="locations" id="locations">
+  <div class="wrap">
+    <h2>Visit Our Stores</h2>
+    <p class="sub">Two locations serving families and institutions across Odisha with hands-on consultations and product displays.</p>
+    <div class="store-grid">
+      <div class="store-card">
+        <div class="store-photo">
+          <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784282014/IMG_20260717_120131_695.jpg_yhc3kg.jpg" alt="Ohh Baby BBSR Store">
+        </div>
+        <div class="store-body">
+          <span class="store-tag">Store 01</span>
+          <h3>Ohh Baby BBSR | Kids Indoor Play Area</h3>
+          <div class="store-address">
+            <span class="pin">📍</span>
+            <span>K7/310, Kalinganagar, Bhubaneswar, Shankarpur, Odisha 751029</span>
+          </div>
+          <a href="https://maps.app.goo.gl/8JW9hX9BnArVBnH66" target="_blank" class="direction-btn">Get Directions →</a>
+        </div>
+      </div>
+      <div class="store-card">
+        <div class="store-photo">
+          <img src="https://res.cloudinary.com/dara80vtx/image/upload/f_auto,q_auto/v1784282011/IMG_4819_yslth9.heic" alt="Ohh Baby Jagamara Store">
+        </div>
+        <div class="store-body">
+          <span class="store-tag">Store 02</span>
+          <h3>Ohh Baby | Indoor Kids Play Area Setup | Kids Toys Store</h3>
+          <div class="store-address">
+            <span class="pin">📍</span>
+            <span>Plot No A/10, Krishna Garden, Phase 2, Jagamara, Bhubaneswar, Odisha 751020</span>
+          </div>
+          <a href="https://maps.app.goo.gl/XPgi53vwEcYmHjSd6" target="_blank" class="direction-btn">Get Directions →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">
+          <img src="https://orchid-hippopotamus-237502.hostingersite.com/wp-content/uploads/2026/07/6f3552e7-ed33-4e20-9df2-e459625993d7-e1784097760874.png" alt="PEPL logo" style="height:64px;width:auto;">
+        </div>
+        <p>Pitabash Enterprises Private Limited is dedicated to creating safe, engaging, and development-oriented spaces for children through innovative products, playgrounds, crèches, and educational infrastructure solutions.</p>
+        <div class="foot-contact"><span class="foot-ic">✉</span> info@pitabash.com</div>
+        <div class="foot-contact"><span class="foot-ic">☎</span> +91 XXXXX XXXXX</div>
+        <div class="foot-contact"><span class="foot-ic">📍</span> Street of View 2891, New York City</div>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <div class="foot-links">
+          <a href="#">Welcome Home →</a>
+          <a href="#">About Us →</a>
+          <a href="#">How it work →</a>
+          <a href="#">Single Post →</a>
+          <a href="#">We Help Desk →</a>
+        </div>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <div class="foot-links">
+          <a href="#">Our Service →</a>
+          <a href="#">Testimonials →</a>
+          <a href="#">Blog Stories →</a>
+          <a href="#">List Price →</a>
+          <a href="#">Contact Us →</a>
+        </div>
+      </div>
+      <div>
+        <h4>Get Direction</h4>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>Copyright © 2023. All rights reserved</span>
+      <div class="socials">
+        <span>𝕏</span><span>◎</span><span>▶</span><span>f</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    const slides = document.querySelectorAll('#heroSlider .slide');
+    const dotsWrap = document.getElementById('sliderDots');
+    let current = 0;
+    let timer;
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      if(i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+    const dots = dotsWrap.querySelectorAll('button');
+
+    function goTo(i){
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = (i + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+      resetTimer();
+    }
+    window.changeSlide = (dir) => goTo(current + dir);
+
+    function resetTimer(){
+      clearInterval(timer);
+      timer = setInterval(() => goTo(current + 1), 4500);
+    }
+    resetTimer();
+  })();
+
+  (function(){
+    const slides = document.querySelectorAll('#testSlider .test-slide');
+    const dotsWrap = document.getElementById('testDots');
+    let current = 0;
+    let timer;
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      if(i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+    const dots = dotsWrap.querySelectorAll('button');
+
+    function goTo(i){
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = (i + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+      resetTimer();
+    }
+
+    function resetTimer(){
+      clearInterval(timer);
+      timer = setInterval(() => goTo(current + 1), 5500);
+    }
+    resetTimer();
+  })();
+
+  (function(){
+    const btn = document.getElementById('hamburgerBtn');
+    const nav = document.getElementById('mainNav');
+    if(!btn || !nav) return;
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('open');
+      nav.classList.toggle('open');
+    });
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        btn.classList.remove('open');
+        nav.classList.remove('open');
+      });
+    });
+  })();
+</script>
+</body>
+</html>

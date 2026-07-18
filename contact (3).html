@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | Pitabash Enterprises</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#152a4a;
+    --navy-soft:#2c4468;
+    --teal:#1c5d78;
+    --teal-dark:#134759;
+    --orange:#f2801f;
+    --cream:#fbf9f5;
+    --grey:#6c7688;
+    --line:#e8e6df;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Jost','Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;
+    color:var(--navy);
+    background:var(--cream);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Jost',sans-serif; font-weight:700; color:var(--navy); line-height:1.15;}
+  a{text-decoration:none; color:inherit;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+
+  /* HEADER */
+  header{padding:14px 0;}
+  .header-inner{display:flex; align-items:center; justify-content:space-between;}
+  .logo img{height:88px; width:auto;}
+  nav{display:flex; gap:38px; font-size:15px; font-weight:500; color:var(--navy-soft);}
+  nav a{position:relative; padding-bottom:4px;}
+  nav a.active{color:var(--navy); font-weight:700;}
+  nav a.active::after{content:""; position:absolute; left:0; bottom:0; width:100%; height:2px; background:var(--orange);}
+  .hamburger{
+    display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px; z-index:50;
+  }
+  .hamburger span{width:26px; height:2.5px; background:var(--navy); border-radius:2px; transition:transform .25s ease, opacity .25s ease;}
+  .hamburger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg);}
+
+  /* PAGE BANNER */
+  .page-banner{
+    position:relative; height:260px; overflow:hidden;
+    display:flex; align-items:center; justify-content:center; text-align:center;
+  }
+  .page-banner img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+  .page-banner::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(0deg, rgba(21,42,74,.82), rgba(21,42,74,.6));
+  }
+  .banner-inner{position:relative; z-index:2; color:#fff;}
+  .banner-inner h1{color:#fff; font-size:42px; margin-bottom:10px;}
+  .breadcrumb{font-size:14px; color:#dbe3ee;}
+  .breadcrumb a{color:#fff; font-weight:600;}
+  .breadcrumb span{margin:0 8px; opacity:.6;}
+
+  /* QUICK CONTACT STRIP */
+  .quick-strip{padding:60px 0 10px;}
+  .quick-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+  .quick-card{
+    background:#fff; border:1px solid var(--line); border-radius:14px; padding:30px 26px;
+    display:flex; gap:16px; align-items:flex-start;
+    box-shadow:0 10px 30px rgba(21,42,74,.05);
+  }
+  .quick-ic{
+    flex:none; width:48px;height:48px; border-radius:12px; background:var(--teal-dark); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:20px;
+  }
+  .quick-card h3{font-size:16px; margin-bottom:6px;}
+  .quick-card p{color:var(--grey); font-size:14px; line-height:1.6;}
+  .quick-card a.link{color:var(--teal-dark); font-weight:600; font-size:14px;}
+
+  /* FORM SECTION */
+  .contact-main{padding:70px 0 30px;}
+  .contact-grid{display:grid; grid-template-columns:1.2fr 1fr; gap:60px; align-items:start;}
+  .eyebrow{font-size:13px; letter-spacing:2px; color:var(--orange); font-weight:700; text-transform:uppercase; margin-bottom:10px;}
+  .contact-main h2{font-size:32px; margin-bottom:14px;}
+  .contact-main .sub{color:var(--grey); font-size:15px; line-height:1.7; margin-bottom:30px;}
+  .form-card{
+    background:#fff; border-radius:16px; padding:38px; border:1px solid var(--line);
+    box-shadow:0 14px 34px rgba(21,42,74,.06);
+  }
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:18px;}
+  .field{display:flex; flex-direction:column; gap:8px;}
+  .field.full{grid-column:1/-1;}
+  .field label{font-size:13.5px; font-weight:600; color:var(--navy);}
+  .field input, .field select, .field textarea{
+    border:1px solid var(--line); border-radius:8px; padding:13px 14px; font-family:'Jost',sans-serif;
+    font-size:14.5px; color:var(--navy); background:var(--cream); outline:none; transition:border-color .2s ease;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{border-color:var(--teal-dark);}
+  .field textarea{resize:vertical; min-height:120px;}
+  .submit-btn{
+    width:100%; padding:15px; border:none; border-radius:8px; background:var(--teal-dark); color:#fff;
+    font-family:'Jost',sans-serif; font-size:15.5px; font-weight:700; cursor:pointer; transition:background .2s ease;
+  }
+  .submit-btn:hover{background:var(--navy);}
+  .form-note{font-size:13px; color:var(--grey); margin-top:14px; text-align:center;}
+  .form-success{
+    display:none; background:#eaf6ec; border:1px solid #bfe3c6; color:#256b34; border-radius:8px;
+    padding:14px 16px; font-size:14px; font-weight:600; margin-bottom:18px;
+  }
+  .form-success.show{display:block;}
+
+  .whatsapp-card{
+    background:linear-gradient(135deg,#1ea952,#128c42); border-radius:16px; padding:32px;
+    color:#fff; margin-bottom:26px;
+  }
+  .whatsapp-card h3{color:#fff; font-size:19px; margin-bottom:10px;}
+  .whatsapp-card p{font-size:14px; opacity:.92; line-height:1.7; margin-bottom:20px;}
+  .whatsapp-btn{
+    display:inline-flex; align-items:center; gap:10px; background:#fff; color:#128c42;
+    padding:12px 22px; border-radius:8px; font-weight:700; font-size:14.5px;
+  }
+  .info-card{
+    background:#fff; border:1px solid var(--line); border-radius:16px; padding:30px;
+    box-shadow:0 10px 30px rgba(21,42,74,.05);
+  }
+  .info-row{display:flex; gap:14px; padding:16px 0; border-bottom:1px solid var(--line);}
+  .info-row:last-child{border-bottom:none;}
+  .info-ic{flex:none; font-size:18px;}
+  .info-row h4{font-size:14.5px; margin-bottom:4px;}
+  .info-row p{color:var(--grey); font-size:13.5px; line-height:1.6;}
+  .info-row a{color:var(--teal-dark); font-weight:600;}
+
+  /* STORE LOCATIONS */
+  .locations{padding:60px 0 90px;}
+  .locations h2{font-size:32px; text-align:center; margin-bottom:12px;}
+  .locations .sub{text-align:center; color:var(--grey); font-size:15.5px; max-width:520px; margin:0 auto 46px;}
+  .store-grid{display:grid; grid-template-columns:1fr 1fr; gap:36px;}
+  .store-card{
+    background:#fff; border-radius:14px; overflow:hidden; box-shadow:0 10px 30px rgba(21,42,74,.08);
+    border:1px solid var(--line);
+  }
+  .store-map{height:200px;}
+  .store-map iframe{width:100%; height:100%; border:0; display:block;}
+  .store-body{padding:26px 28px 28px;}
+  .store-tag{
+    display:inline-block; font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+    color:var(--orange); margin-bottom:8px;
+  }
+  .store-body h3{font-size:19px; margin-bottom:10px;}
+  .store-address{
+    display:flex; align-items:flex-start; gap:10px; color:var(--grey); font-size:14.5px; line-height:1.7; margin-bottom:20px;
+  }
+  .store-address .pin{flex:none; margin-top:2px;}
+  .direction-btn{
+    display:inline-flex; align-items:center; gap:8px; padding:11px 22px; border-radius:6px;
+    background:var(--teal-dark); color:#fff; font-size:14px; font-weight:600;
+  }
+  .direction-btn:hover{background:var(--navy);}
+
+  /* FOOTER */
+  footer{background:var(--navy); color:#c7d0dd; padding:70px 0 26px;}
+  .foot-grid{display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:40px; margin-bottom:50px;}
+  .foot-logo img{height:64px; width:auto; margin-bottom:20px;}
+  footer p{font-size:14.5px; line-height:1.8; color:#a9b4c5; max-width:280px;}
+  .foot-contact{display:flex; align-items:center; gap:10px; margin-top:16px; font-size:14.5px; color:#c7d0dd;}
+  footer h4{color:#fff; font-family:'Jost',sans-serif; font-weight:700; font-size:17px; margin-bottom:22px;}
+  .foot-links{display:flex; flex-direction:column; gap:14px;}
+  .foot-links a{font-size:14.5px; color:#a9b4c5; display:flex; align-items:center; gap:6px;}
+  .foot-links a:hover{color:#fff;}
+  .foot-bottom{
+    border-top:1px solid rgba(255,255,255,.12); padding-top:24px;
+    display:flex; justify-content:space-between; align-items:center; font-size:13.5px; color:#8ea0b8;
+  }
+  .socials{display:flex; gap:14px;}
+  .socials span{
+    width:30px;height:30px;border:1px solid rgba(255,255,255,.25); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:12px; color:#c7d0dd;
+  }
+
+  @media(max-width:940px){
+    nav{
+      display:none; position:absolute; top:100%; left:0; right:0; background:#fff;
+      flex-direction:column; gap:0; padding:10px 0; box-shadow:0 12px 24px rgba(21,42,74,.12); z-index:40;
+    }
+    nav.open{display:flex;}
+    nav a{padding:14px 32px; width:100%;}
+    nav a.active::after{display:none;}
+    nav a.active{background:#f3f5f2;}
+    .hamburger{display:flex;}
+    header{position:relative;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    .banner-inner h1{font-size:30px;}
+    .quick-grid, .contact-grid, .store-grid{grid-template-columns:1fr;}
+    .form-row{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <div class="logo">
+      <img src="https://orchid-hippopotamus-237502.hostingersite.com/wp-content/uploads/2026/07/6f3552e7-ed33-4e20-9df2-e459625993d7-e1784097760874.png" alt="PEPL logo">
+    </div>
+    <nav id="mainNav">
+      <a href="pitabash-enterprises.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="page-banner">
+  <img src="https://orchid-hippopotamus-237502.hostingersite.com/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2026-07-07-at-18.49.41-rqfk6iuquqb9rek5cc7o8dybruoslskwp25zmdpapc.jpeg" alt="Pitabash Enterprises">
+  <div class="banner-inner">
+    <h1>Contact Us</h1>
+    <div class="breadcrumb"><a href="pitabash-enterprises.html">Home</a><span>/</span>Contact</div>
+  </div>
+</section>
+
+<section class="quick-strip">
+  <div class="wrap quick-grid">
+    <div class="quick-card">
+      <div class="quick-ic">✉</div>
+      <div>
+        <h3>Email Us</h3>
+        <p>We usually reply within a business day.</p>
+        <a href="mailto:info@pitabash.com" class="link">info@pitabash.com</a>
+      </div>
+    </div>
+    <div class="quick-card">
+      <div class="quick-ic">☎</div>
+      <div>
+        <h3>Call Us</h3>
+        <p>Mon–Sat, 10:00 AM – 7:00 PM</p>
+        <a href="tel:+91XXXXXXXXXX" class="link">+91 XXXXX XXXXX</a>
+      </div>
+    </div>
+    <div class="quick-card">
+      <div class="quick-ic">📍</div>
+      <div>
+        <h3>Visit a Store</h3>
+        <p>Two locations across Bhubaneswar.</p>
+        <a href="#locations" class="link">View Locations</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-main">
+  <div class="wrap contact-grid">
+    <div>
+      <div class="eyebrow">Get In Touch</div>
+      <h2>Let's Talk About Your Space</h2>
+      <p class="sub">Tell us a bit about your project — a school playground, a crèche setup, or a home play corner — and we'll get back to you with next steps.</p>
+      <div class="form-card">
+        <div class="form-success" id="formSuccess">Thanks! Your message has been received — we'll get back to you shortly.</div>
+        <form id="contactForm">
+          <div class="form-row">
+            <div class="field">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" required placeholder="Your name">
+            </div>
+            <div class="field">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" required placeholder="+91 XXXXX XXXXX">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" required placeholder="you@example.com">
+            </div>
+            <div class="field">
+              <label for="service">I'm Interested In</label>
+              <select id="service">
+                <option>Indoor Play Zone</option>
+                <option>Crèche Setup</option>
+                <option>Outdoor Playground</option>
+                <option>Educational Materials</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field full">
+              <label for="message">Message</label>
+              <textarea id="message" required placeholder="Tell us about your space and requirements..."></textarea>
+            </div>
+          </div>
+          <button type="submit" class="submit-btn">Send Message</button>
+          <p class="form-note">By submitting, you agree to be contacted by Pitabash Enterprises regarding your enquiry.</p>
+        </form>
+      </div>
+    </div>
+
+    <div>
+      <div class="whatsapp-card">
+        <h3>💬 Chat With Us on WhatsApp</h3>
+        <p>Prefer a quick chat? Message us directly for the fastest response on pricing and availability.</p>
+        <a href="https://wa.me/91XXXXXXXXXX" target="_blank" class="whatsapp-btn">Message on WhatsApp →</a>
+      </div>
+      <div class="info-card">
+        <div class="info-row">
+          <span class="info-ic">🏢</span>
+          <div>
+            <h4>Head Office</h4>
+            <p>Bhubaneswar, Odisha, India</p>
+          </div>
+        </div>
+        <div class="info-row">
+          <span class="info-ic">🕐</span>
+          <div>
+            <h4>Working Hours</h4>
+            <p>Monday – Saturday, 10:00 AM – 7:00 PM<br>Sunday: Closed</p>
+          </div>
+        </div>
+        <div class="info-row">
+          <span class="info-ic">✉</span>
+          <div>
+            <h4>Email</h4>
+            <p><a href="mailto:info@pitabash.com">info@pitabash.com</a></p>
+          </div>
+        </div>
+        <div class="info-row">
+          <span class="info-ic">☎</span>
+          <div>
+            <h4>Phone</h4>
+            <p><a href="tel:+91XXXXXXXXXX">+91 XXXXX XXXXX</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="locations" id="locations">
+  <div class="wrap">
+    <h2>Visit Our Stores</h2>
+    <p class="sub">Two locations serving families and institutions across Odisha with hands-on consultations and product displays.</p>
+    <div class="store-grid">
+      <div class="store-card">
+        <div class="store-map">
+          <iframe src="https://www.google.com/maps?q=K7%2F310%2C+Kalinganagar%2C+Bhubaneswar%2C+Shankarpur%2C+Odisha+751029&output=embed" loading="lazy"></iframe>
+        </div>
+        <div class="store-body">
+          <span class="store-tag">Store 01</span>
+          <h3>Ohh Baby BBSR | Kids Indoor Play Area</h3>
+          <div class="store-address">
+            <span class="pin">📍</span>
+            <span>K7/310, Kalinganagar, Bhubaneswar, Shankarpur, Odisha 751029</span>
+          </div>
+          <a href="https://maps.app.goo.gl/8JW9hX9BnArVBnH66" target="_blank" class="direction-btn">Get Directions →</a>
+        </div>
+      </div>
+      <div class="store-card">
+        <div class="store-map">
+          <iframe src="https://www.google.com/maps?q=Plot+No+A%2F10%2C+Krishna+Garden%2C+Phase+2%2C+Jagamara%2C+Bhubaneswar%2C+Odisha+751020&output=embed" loading="lazy"></iframe>
+        </div>
+        <div class="store-body">
+          <span class="store-tag">Store 02</span>
+          <h3>Ohh Baby | Indoor Kids Play Area Setup | Kids Toys Store</h3>
+          <div class="store-address">
+            <span class="pin">📍</span>
+            <span>Plot No A/10, Krishna Garden, Phase 2, Jagamara, Bhubaneswar, Odisha 751020</span>
+          </div>
+          <a href="https://maps.app.goo.gl/XPgi53vwEcYmHjSd6" target="_blank" class="direction-btn">Get Directions →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">
+          <img src="https://orchid-hippopotamus-237502.hostingersite.com/wp-content/uploads/2026/07/6f3552e7-ed33-4e20-9df2-e459625993d7-e1784097760874.png" alt="PEPL logo">
+        </div>
+        <p>Pitabash Enterprises Private Limited is dedicated to creating safe, engaging, and development-oriented spaces for children through innovative products, playgrounds, crèches, and educational infrastructure solutions.</p>
+        <div class="foot-contact"><span>✉</span> info@pitabash.com</div>
+        <div class="foot-contact"><span>☎</span> +91 XXXXX XXXXX</div>
+        <div class="foot-contact"><span>📍</span> Bhubaneswar, Odisha, India</div>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <div class="foot-links">
+          <a href="pitabash-enterprises.html">Welcome Home →</a>
+          <a href="about.html">About Us →</a>
+          <a href="gallery.html">Gallery →</a>
+          <a href="#locations">Our Stores →</a>
+        </div>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <div class="foot-links">
+          <a href="#">Our Service →</a>
+          <a href="#">Testimonials →</a>
+          <a href="#">Blog Stories →</a>
+          <a href="contact.html">Contact Us →</a>
+        </div>
+      </div>
+      <div>
+        <h4>Get Direction</h4>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>Copyright © 2023. All rights reserved</span>
+      <div class="socials">
+        <span>𝕏</span><span>◎</span><span>▶</span><span>f</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Hamburger toggle
+  (function(){
+    const btn = document.getElementById('hamburgerBtn');
+    const nav = document.getElementById('mainNav');
+    if(!btn || !nav) return;
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('open');
+      nav.classList.toggle('open');
+    });
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        btn.classList.remove('open');
+        nav.classList.remove('open');
+      });
+    });
+  })();
+
+  // Contact form (front-end only demo — no backend wired up)
+  (function(){
+    const form = document.getElementById('contactForm');
+    const success = document.getElementById('formSuccess');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      success.classList.add('show');
+      form.reset();
+      success.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+  })();
+</script>
+</body>
+</html>

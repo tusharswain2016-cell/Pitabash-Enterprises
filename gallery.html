@@ -34,7 +34,12 @@
   /* HEADER */
   header{padding:14px 0;}
   .header-inner{display:flex; align-items:center; justify-content:space-between;}
+  .logo{display:flex; align-items:center; gap:14px;}
   .logo img{height:88px; width:auto;}
+  .since-badge{
+    font-size:11.5px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+    color:var(--teal-dark); padding-left:14px; margin-left:2px; border-left:1px solid var(--line);
+  }
   nav{display:flex; gap:38px; font-size:15px; font-weight:500; color:var(--navy-soft);}
   nav a{position:relative; padding-bottom:4px;}
   nav a.active{color:var(--navy); font-weight:700;}
@@ -154,6 +159,12 @@
     nav a.active{background:#f3f5f2;}
     .hamburger{display:flex;}
     header{position:relative;}
+    .logo{gap:8px;}
+    .logo img{height:48px !important;}
+    .since-badge{
+      display:inline-block; font-size:9.5px; padding:5px 10px; letter-spacing:1px;
+      border-left:none; border-radius:20px; background:var(--teal-dark); color:#fff; margin-left:0;
+    }
     .foot-grid{grid-template-columns:1fr 1fr;}
     .banner-inner h1{font-size:30px;}
     .gallery-grid{grid-template-columns:repeat(2,1fr); grid-auto-rows:150px;}
@@ -167,6 +178,7 @@
   <div class="wrap header-inner">
     <div class="logo">
       <img src="https://orchid-hippopotamus-237502.hostingersite.com/wp-content/uploads/2026/07/6f3552e7-ed33-4e20-9df2-e459625993d7-e1784097760874.png" alt="PEPL logo">
+      <span class="since-badge">Since 2021</span>
     </div>
     <nav id="mainNav">
       <a href="pitabash-enterprises.html">Home</a>
@@ -198,6 +210,7 @@
       <button class="filter-tab" data-filter="aganwadi">Aganwadi</button>
       <button class="filter-tab" data-filter="blueprint">Blueprint Signature</button>
       <button class="filter-tab" data-filter="airport">Bhubaneswar Airport Terminal 1</button>
+      <button class="filter-tab" data-filter="raikala">Raikala Anganwadi Kendra</button>
     </div>
   </div>
 </section>
@@ -284,6 +297,23 @@
       </div>
       <div class="gallery-item" data-cat="airport">
         <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784370850/WhatsApp_Image_2026-07-18_at_15.58.25_sxha7d.jpg" alt="Bhubaneswar Airport Terminal 1 project">
+      </div>
+
+      <!-- Raikala Anganwadi Kendra -->
+      <div class="gallery-item tall" data-cat="raikala">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784545229/144d9c5c-8d2e-48cc-bc26-b89e9768bc9d_gj9q4m.jpg" alt="Raikala Anganwadi Kendra">
+      </div>
+      <div class="gallery-item" data-cat="raikala">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784545228/c1111812-8559-4873-a082-3e5b00ad4d88_sxisfp.jpg" alt="Raikala Anganwadi Kendra">
+      </div>
+      <div class="gallery-item wide" data-cat="raikala">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784545228/e407510f-c6d8-4b81-93fe-b211df5726a5_khibl1.jpg" alt="Raikala Anganwadi Kendra">
+      </div>
+      <div class="gallery-item" data-cat="raikala">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784545228/7f8fd80d-c6d0-408c-a29d-a9b0cdfeb361_q44smn.jpg" alt="Raikala Anganwadi Kendra">
+      </div>
+      <div class="gallery-item" data-cat="raikala">
+        <img src="https://res.cloudinary.com/dara80vtx/image/upload/v1784545228/0429d846-4fb5-48f5-b75b-e293c2ecd236_akpy0m.jpg" alt="Raikala Anganwadi Kendra">
       </div>
     </div>
   </div>
